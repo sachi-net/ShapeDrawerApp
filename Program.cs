@@ -6,37 +6,6 @@ public class Program
 {
     public static void Main()
     {
-        Test_3_3P_DrawingClass();
-    }
-
-    static void Test_2_3P_BasicShape()
-    {
-        Shape myShape = new();
-        Window window = new("Win", 800, 600);
-        do
-        {
-            SplashKit.ProcessEvents();
-            SplashKit.ClearScreen();
-
-            if (SplashKit.MouseClicked(MouseButton.LeftButton))
-            {
-                myShape.X = SplashKit.MouseX();
-                myShape.Y = SplashKit.MouseY();
-            }
-
-            if (myShape.IsAt(SplashKit.MousePosition()) && SplashKit.KeyTyped(KeyCode.SpaceKey))
-            {
-                myShape.Color = SplashKit.RandomColor();
-            }
-
-            myShape.Draw();
-
-            SplashKit.RefreshScreen();
-        } while (!window.CloseRequested);
-    }
-
-    static void Test_3_3P_DrawingClass()
-    {
         Drawing myDrawing = new();
         Window window = new("Win", 800, 600);
 
