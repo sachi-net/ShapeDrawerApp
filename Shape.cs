@@ -49,4 +49,18 @@ internal abstract class Shape
     {
         return false;
     }
+
+    public virtual void SaveTo(StreamWriter writer)
+    {
+        writer.WriteColor(Color);
+        writer.WriteLine(_x);
+        writer.WriteLine(_y);
+    }
+
+    public virtual void LoadTo(StreamReader reader)
+    {
+        _color = reader.ReadColor();
+        _x = reader.ReadInteger();
+        _y = reader.ReadInteger();
+    }
 }

@@ -44,4 +44,17 @@ internal class MyCircle : Shape
     {
         return Math.Pow(X - pt.X, 2) + Math.Pow(Y - pt.Y, 2) <= Math.Pow(_radius, 2);
     }
+
+    public override void SaveTo(StreamWriter writer)
+    {
+        writer.WriteLine("Circle");
+        base.SaveTo(writer);
+        writer.WriteLine(_radius);
+    }
+
+    public override void LoadTo(StreamReader reader)
+    {
+        base.LoadTo(reader);
+        _radius = reader.ReadInteger();
+    }
 }

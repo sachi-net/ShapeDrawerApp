@@ -17,11 +17,24 @@ public class Program
         Window window = new("Win", 800, 600);
         ShapeKind kindToAdd = ShapeKind.Rectangle;
         int numOfLines = 3;
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "TestDrawing.txt");
 
         do
         {
             SplashKit.ProcessEvents();
             SplashKit.ClearScreen();
+
+            if (SplashKit.KeyTyped(KeyCode.OKey))
+            {
+                try
+                {
+                    myDrawing.Load(path);
+                }
+                catch (Exception exp)
+                {
+                    Console.WriteLine("Error loading file: {0}", exp.Message);
+                }
+            }
 
             if (SplashKit.KeyTyped(KeyCode.RKey))
             {
@@ -86,6 +99,11 @@ public class Program
             }
 
             myDrawing.Draw();
+
+            if (SplashKit.KeyTyped(KeyCode.SKey))
+            {
+                myDrawing.Save(path);
+            }
 
             SplashKit.RefreshScreen();
         } while (!window.CloseRequested);

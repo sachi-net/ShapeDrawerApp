@@ -51,4 +51,19 @@ internal class MyRectangle : Shape
     {
         return X <= pt.X && pt.X <= X + _width && Y <= pt.Y && pt.Y <= Y + _height;
     }
+
+    public override void SaveTo(StreamWriter writer)
+    {
+        writer.WriteLine("Rectangle");
+        base.SaveTo(writer);
+        writer.WriteLine(_width);
+        writer.WriteLine(_height);
+    }
+
+    public override void LoadTo(StreamReader reader)
+    {
+        base.LoadTo(reader);
+        _width = reader.ReadInteger();
+        _height = reader.ReadInteger();
+    }
 }

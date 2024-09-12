@@ -55,4 +55,19 @@ internal class MyLine : Shape
         };
         return SplashKit.PointOnLine(pt, line);
     }
+
+    public override void SaveTo(StreamWriter writer)
+    {
+        writer.WriteLine("Line");
+        base.SaveTo(writer);
+        writer.WriteLine(_endX);
+        writer.WriteLine(_endY);
+    }
+
+    public override void LoadTo(StreamReader reader)
+    {
+        base.LoadTo(reader);
+        _endX = reader.ReadInteger();
+        _endY = reader.ReadInteger();
+    }
 }
