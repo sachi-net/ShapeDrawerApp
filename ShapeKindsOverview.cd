@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ShapeDrawer.Drawing">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAABAAAAgAAAAAAAEAAAAAAAAAAAAAgEQAAAEA=</HashCode>
+      <FileName>Drawing.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_shapes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ShapeDrawer.Shape">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAQIAgAAAAAABAIAAAAAAAEAAAAAgAAAYAI=</HashCode>
+      <FileName>Shape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShapeDrawer.MyCircle">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAIAAAAAAAAAgAAAAAABAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MyCircle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShapeDrawer.MyLine">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAwAgAgAAAAAABAIAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MyLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShapeDrawer.MyRectangle">
+    <Position X="7.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABACAAgAAAAAABEIAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MyRectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

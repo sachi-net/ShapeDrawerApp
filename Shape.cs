@@ -1,14 +1,12 @@
 ﻿using SplashKitSDK;
 
-namespace SplashKitDemo;
+namespace ShapeDrawer;
 
-internal class Shape
+internal abstract class Shape
 {
     private Color _color;
     private float _x;
     private float _y;
-    private int _width;
-    private int _height;
     private bool _selected;
 
     public Color Color
@@ -26,50 +24,43 @@ internal class Shape
         get { return _y; }
         set { _y = value; }
     }
-    public int Width
-    {
-        get { return _width; }
-        set { _width = value; }
-    }
-    public int Height
-    {
-        get { return _height; }
-        set { _height = value; }
-    }
     public bool Selected
     {
         get { return _selected; }
         set { _selected = value; }
     }
 
-
-    public Shape()
+    public Shape() : this(Color.Yellow)
     {
-        _color = Color.Green;
         _x = 0;
         _y = 0;
-        _width = 100;
-        _height = 100;
     }
 
-    public void Draw()
+    protected Shape(Color color)
     {
-        SplashKit.FillRectangle(_color, _x, _y, _width, _height);
-        if (_selected)
-        {
-            DrawOutline();
-        }
+        _color = color;
     }
 
-    public void DrawOutline()
+    public abstract void Draw();
+
+    public abstract void DrawOutline();
+
+    public virtual bool IsAt(Point2D pt)
     {
-        int idLastDigit = 3;
-        int offset = 5 + idLastDigit;
-        SplashKit.DrawRectangle(Color.Black, X - offset, Y - offset, _width + 2*offset, _height + 2*offset);
+        return false;
     }
 
-    public bool IsAt(Point2D pt)
+    public virtual void SaveTo(StreamWriter writer)
     {
-        return _x <= pt.X && pt.X <= _x + _width && _y <= pt.Y && pt.Y <= _y + _height;
+        writer.WriteColor(Color);
+        writer.WriteLine(_x);
+        writer.WriteLine(_y);
+    }
+
+    public virtual void LoadTo(StreamReader reader)
+    {
+        _color = reader.ReadColor();
+        _x = reader.ReadInteger();
+        _y = reader.ReadInteger();
     }
 }

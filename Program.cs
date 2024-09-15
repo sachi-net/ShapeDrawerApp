@@ -1,57 +1,82 @@
 using SplashKitSDK;
 
-namespace SplashKitDemo;
+namespace ShapeDrawer;
 
 public class Program
 {
+    private enum ShapeKind
+    {
+        Rectangle,
+        Circle,
+        Line
+    }
+
     public static void Main()
-    {
-        Test_3_3P_DrawingClass();
-    }
-
-    static void Test_2_3P_BasicShape()
-    {
-        Shape myShape = new();
-        Window window = new("Win", 800, 600);
-        do
-        {
-            SplashKit.ProcessEvents();
-            SplashKit.ClearScreen();
-
-            if (SplashKit.MouseClicked(MouseButton.LeftButton))
-            {
-                myShape.X = SplashKit.MouseX();
-                myShape.Y = SplashKit.MouseY();
-            }
-
-            if (myShape.IsAt(SplashKit.MousePosition()) && SplashKit.KeyTyped(KeyCode.SpaceKey))
-            {
-                myShape.Color = SplashKit.RandomColor();
-            }
-
-            myShape.Draw();
-
-            SplashKit.RefreshScreen();
-        } while (!window.CloseRequested);
-    }
-
-    static void Test_3_3P_DrawingClass()
     {
         Drawing myDrawing = new();
         Window window = new("Win", 800, 600);
+        ShapeKind kindToAdd = ShapeKind.Rectangle;
+        int numOfLines = 3;
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "TestDrawing.txt");
 
         do
         {
             SplashKit.ProcessEvents();
             SplashKit.ClearScreen();
 
+            if (SplashKit.KeyTyped(KeyCode.OKey))
+            {
+                try
+                {
+                    myDrawing.Load(path);
+                }
+                catch (Exception exp)
+                {
+                    Console.WriteLine("Error loading file: {0}", exp.Message);
+                }
+            }
+
+            if (SplashKit.KeyTyped(KeyCode.RKey))
+            {
+                kindToAdd = ShapeKind.Rectangle;
+            }
+
+            if (SplashKit.KeyTyped(KeyCode.CKey))
+            {
+                kindToAdd = ShapeKind.Circle;
+            }
+
+            if (SplashKit.KeyTyped(KeyCode.LKey))
+            {
+                kindToAdd = ShapeKind.Line;
+            }
+
+            if (numOfLines is 0)
+            {
+                numOfLines = 5;
+            }
+
             if (SplashKit.MouseClicked(MouseButton.LeftButton))
             {
-                Shape shape = new()
+                Shape shape;
+
+                switch (kindToAdd)
                 {
-                    X = SplashKit.MouseX(),
-                    Y = SplashKit.MouseY()
-                };
+                    case ShapeKind.Circle:
+                        shape = new MyCircle();
+                        break;
+                    case ShapeKind.Line:
+                        shape = new MyLine();
+                        numOfLines--;
+                        break;
+                    default:
+                        shape = new MyRectangle();
+                        break;
+                }
+
+                shape.X = SplashKit.MouseX();
+                shape.Y = SplashKit.MouseY();
+
                 myDrawing.AddShape(shape);
             }
 
@@ -74,6 +99,11 @@ public class Program
             }
 
             myDrawing.Draw();
+
+            if (SplashKit.KeyTyped(KeyCode.SKey))
+            {
+                myDrawing.Save(path);
+            }
 
             SplashKit.RefreshScreen();
         } while (!window.CloseRequested);
